@@ -19,7 +19,7 @@
     .popup[data-popup-name="product"].active .content,
     .popup[data-popup-name="shop"].active .content {
         width: 280px;
-        margin: 20px auto;
+        margin: 15px auto;
     }
 
     .popup[data-popup-name="login"].active .content {
