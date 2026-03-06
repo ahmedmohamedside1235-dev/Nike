@@ -97,13 +97,13 @@
 
 
     header .sliders>button.next {
-        bottom: 10px;
+        bottom: 30px;
         right: 20px;
         top: initial;
     }
 
     header .sliders>button.prev {
-        bottom: 10px;
+        bottom: 30px;
         right: 80px;
         top: initial;
         left: initial;
