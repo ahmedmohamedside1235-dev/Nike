@@ -313,6 +313,7 @@ function showDataIntoCart() {
     });
 }
 
+//* check if product cart empty
 function checkProductLength() {    
     if (productsCart.length == 0) {
         alertEmpty.classList.remove("d-none");
@@ -333,6 +334,7 @@ function deletProductFromCart(productId) {
     checkProductLength();
 }
 
+//* show number of favorate product
 function ShowHeartCounter(heart) {
     let bool = heart.classList.contains("active");
     if (bool) {
