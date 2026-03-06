@@ -1,0 +1,416 @@
+@media (max-width: 1300px) {
+
+    /* *tilte */
+    .title h2 {
+        font-size: 13px;
+    }
+
+    .title img {
+        width: 25%;
+    }
+
+    /* *popup product and cart */
+    .popup[data-popup-name="product"].active,
+    .popup[data-popup-name="shop"].active {
+        display: block;
+        overflow-y: auto;
+    }
+
+    .popup[data-popup-name="product"].active .content,
+    .popup[data-popup-name="shop"].active .content {
+        width: 280px;
+        margin: 20px auto;
+    }
+
+    .popup[data-popup-name="login"].active .content {
+        max-width: 300px;
+        margin: auto;
+    }
+
+    .popup[data-popup-name="product"].active .content p.description {
+        font-size: 11px;
+    }
+
+    /* *Navegation */
+    .navbar .navbar-brand {
+        width: 25%;
+    }
+
+    .navbar .navbar-toggler {
+        border: 1px solid var(--main-color);
+        width: 45px;
+        height: 35px;
+        border-radius: 5px;
+        padding: 5px 10px;
+    }
+
+    .navbar .navbar-toggler:focus {
+        box-shadow: none;
+    }
+
+    .navbar .navbar-toggler span {
+        display: block;
+        background-color: var(--main-color);
+        width: 100%;
+        margin: auto;
+        height: 2px;
+    }
+
+    .navbar .navbar-collapse {
+        background: #ada996;
+        background: -webkit-linear-gradient(to right, #eaeaea, #dbdbdb, #f2f2f2, #ada996);
+        background: linear-gradient(to right, #eaeaea, #dbdbdb, #f2f2f2, #ada996);
+        padding: 20px 10px;
+        border-radius: 10px;
+    }
+
+    .navbar .navbar-collapse ul {
+        align-items: center;
+        justify-content: center;
+    }
+
+    .navbar .navbar-collapse ul .nav-item {
+        margin-bottom: 10px;
+    }
+
+    /* *Header */
+    header .sliders {
+        padding-top: 10px;
+    }
+
+    header .slider-item .part1 {
+        margin-top: 48px;
+    }
+
+    header .slider-item .part1 h2 {
+        font-size: 30px;
+    }
+
+
+    header .slider-item .part2 img:first-child {
+        top: 2%;
+        left: 10%;
+        width: 50%;
+    }
+
+    header .slider-item .part2 img:last-child {
+        width: 70%;
+        left: 15%;
+        top: 25%;
+    }
+
+
+    header .sliders>button.next {
+        bottom: 10px;
+        right: 20px;
+        top: initial;
+    }
+
+    header .sliders>button.prev {
+        bottom: 10px;
+        right: 80px;
+        top: initial;
+        left: initial;
+    }
+
+    header .slider-item .part2 img:first-child {
+        top: -1%;
+        left: 10%;
+        width: 48%;
+    }
+
+    header .slider-item .part2 img:last-child {
+        width: 68%;
+        left: 15%;
+        top: 15%;
+    }
+
+    /* *section offer */
+    #Offer .item img {
+        height: 150px;
+    }
+
+    /* *section latest */
+    #Latest .product .part2 .item>* {
+        margin-bottom: 14px;
+    }
+
+    #Latest .content .part2 .item>h3 {
+        font-size: 18px;
+    }
+
+    #Latest .product .part2 .item>p {
+        font-size: 12px;
+    }
+
+    /* *section featured */
+    #Featured .product {
+        max-width: 280px;
+        margin: auto;
+    }
+
+    #Featured .product .head p {
+        top: 5px;
+        right: -111px;
+    }
+}
+
+@media (min-width: 371px) and (max-width: 1300px) {
+
+    /* *tilte */
+    .title h2 {
+        font-size: 15px;
+    }
+
+    /* *popup product and cart */
+    .popup[data-popup-name="product"].active .content,
+    .popup[data-popup-name="shop"].active .content {
+        width: 350px;
+    }
+
+    .popup[data-popup-name="login"].active .content {
+        max-width: 80%;
+    }
+
+    .popup[data-popup-name="product"].active .content p.description {
+        font-size: 14px;
+    }
+
+    /* *Navegation */
+    .navbar .navbar-brand {
+        width: 20%;
+    }
+
+    /* *Header */
+    header .sliders {
+        padding-top: 18px;
+    }
+
+    header .slider-item .part2 img:first-child {
+        width: 45%;
+    }
+
+    header .slider-item .part2 img:last-child {
+        width: 60%;
+    }
+
+    /* *section latest */
+    #Latest .product .part2 .item>p {
+        font-size: 15px;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 1300px) {
+
+
+    /* *popup product and cart */
+    .popup[data-popup-name="shop"].active .content {
+        width: 500px;
+    }
+
+    .popup[data-popup-name="product"].active .content p.description {
+        font-size: 15px;
+    }
+
+    /* *Header */
+    header .sliders {
+        padding-top: 80px;
+    }
+
+    header .slider-item .part2 img:first-child {
+        top: -10%;
+        left: 15%;
+        width: 40%;
+    }
+
+    header .slider-item .part2 img:last-child {
+        width: 55%;
+        left: 20%;
+        top: 5%;
+    }
+
+    header .sliders>button.next,
+    header .sliders>button.prev {
+        bottom: 20px;
+    }
+
+    /* *section latest */
+    #Latest .product {
+        max-width: 390px;
+        margin: auto;
+    }
+
+    /* *section featured*/
+    #Featured .product .head p {
+        top: 6px;
+        right: -93px;
+    }
+
+}
+
+@media (min-width: 768px) and (max-width: 1300px) {
+
+    .title img {
+        width: 20%;
+    }
+
+    /* *popup product and cart */
+    .popup[data-popup-name="product"].active {
+        display: flex;
+    }
+
+    .popup[data-popup-name="shop"].active {
+        display: block;
+    }
+
+    .popup[data-popup-name="product"].active .content,
+    .popup[data-popup-name="shop"].active .content {
+        width: 750px;
+        margin: initial;
+    }
+
+    .popup[data-popup-name="shop"].active .content {
+        margin: 25px auto;
+    }
+
+    /* *popup product info */
+    .popup[data-popup-name="product"].active .content p.description {
+        font-size: 16px;
+    }
+
+    /* *Navegation */
+    .navbar .navbar-brand {
+        width: 12%;
+    }
+
+    /* *Header */
+
+    header {
+        padding: 0;
+    }
+
+    header .slider-item .part1 {
+        margin-top: 0;
+    }
+
+    header .slider-item .part2 img:first-child {
+        top: -10%;
+        left: 10%;
+        width: 70%;
+    }
+
+    header .slider-item .part2 img:last-child {
+        width: 90%;
+        left: 20%;
+        top: 5%;
+    }
+
+    header .sliders>button.next,
+    header .sliders>button.prev {
+        bottom: 20px;
+    }
+
+    /* *section latest */
+
+    #Latest .product {
+        max-width: 550px;
+        margin: auto;
+    }
+
+    #Latest .product .part1 {
+        margin-bottom: 24px;
+    }
+
+    /* *section featured*/
+    #Featured .product .head p {
+        top: 0;
+        right: -110px;
+    }
+
+}
+
+@media (min-width: 992px) and (max-width: 1300px) {
+
+    /* *tilte */
+    .title h2 {
+        font-size: 30px;
+    }
+
+    /* *Navegation */
+    .navbar .navbar-brand {
+        width: 8%;
+    }
+
+    .navbar .navbar-collapse {
+        background: initial;
+        padding-block: 10px;
+
+    }
+
+    .navbar .navbar-collapse ul .nav-item {
+        margin-bottom: 0;
+    }
+
+    /* *Header */
+
+    header .slider-item .part2 img:last-child {
+        top: 10%;
+        left: 14%;
+    }
+
+    header .slider-item .part2 img:first-child {
+        top: -12%;
+        left: 15%;
+    }
+
+    /* *section latest */
+    #Latest .product {
+        max-width: initial;
+        margin: initial;
+    }
+
+    #Latest .product .part1 {
+        margin-bottom: 0;
+    }
+
+    #Latest .content .part2 .item>h3 {
+        font-size: 20px;
+    }
+
+    #Latest .product .part2 .item>p {
+        font-size: 16px;
+    }
+
+    /* *section featured*/
+    #Featured .product .head p {
+        top: 0px;
+        right: -79px;
+    }
+}
+
+
+@media (min-width: 1181px) and (max-width: 1300px) {
+
+    /* *Header */
+    header .slider-item .part2 img:last-child {
+        top: 10%;
+        left: 14%;
+        width: 85%;
+    }
+
+    header .slider-item .part2 img:first-child {
+        top: -12%;
+        left: 15%;
+        width: 65%;
+    }
+
+    #Latest .product .part2 .item>p {
+        font-size: 15px;
+    }
+
+    /* *section featured*/
+    #Featured .product .head p {
+        top: 5px;
+        right: -92px;
+    }
+}
