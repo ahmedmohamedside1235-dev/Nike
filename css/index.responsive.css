@@ -74,12 +74,8 @@
     }
 
     /* *Header */
-    header .sliders {
-        padding-top: 10px;
-    }
-
     header .slider-item .part1 {
-        margin-top: 48px;
+        margin-top: 5px;
     }
 
     header .slider-item .part1 h2 {
@@ -186,6 +182,10 @@
         padding-top: 18px;
     }
 
+    header .slider-item .part1 {
+        margin-top: 40px;
+    }
+
     header .slider-item .part2 img:first-child {
         width: 45%;
     }
@@ -213,8 +213,12 @@
     }
 
     /* *Header */
-    header .sliders {
+    header .sliders {   
         padding-top: 80px;
+    }
+
+    header .slider-item .part1 {
+        margin-top: 45px;
     }
 
     header .slider-item .part2 img:first-child {
