@@ -6,10 +6,49 @@ function changeSrc(mainSrc, newSrc) {
     return mainScrArr.join("/");
 }
 
+function nextImage() {
+    let currentSlide = document.querySelector("header .slider-item.active"),
+        nextImgSlide = currentSlide.nextElementSibling ?? document.querySelector("header .slider-item:first-child");
+    currentSlide.classList.remove("active");
+    nextImgSlide.classList.add("active");
+
+    let numberSlide = nextImgSlide.dataset.name;
+    updateSlideInLocalStorage(numberSlide);
+    changeColor(numberSlide);
+    changeNavLogo(numberSlide, Nav_logo, "logo");
+    correctImages.forEach((img) => {
+        changeNavLogo(numberSlide, img, "correct");
+    });
+}
+
+function prevImage() {
+    let currentSlide = document.querySelector("header .slider-item.active"),
+        prevImgSlide = currentSlide.previousElementSibling ?? document.querySelector("header .slider-item:last-child");
+    currentSlide.classList.remove("active");
+    prevImgSlide.classList.add("active");
+
+    let numberSlide = prevImgSlide.dataset.name;
+    updateSlideInLocalStorage(numberSlide);
+    changeColor(numberSlide);
+    changeNavLogo(numberSlide, Nav_logo, "logo");
+    correctImages.forEach((img) => {
+        changeNavLogo(numberSlide, img, "correct");
+    });
+}
+
 //* change main color
 function changeColor(nameColor) {
     let value = getComputedStyle(html).getPropertyValue(`--${nameColor}-color`);
     html.style.setProperty("--main-color", value);
+    updateColorInLocalStorage(value);
+}
+
+function updateColorInLocalStorage(value) {
+    localStorage.setItem("mainColor", value);
+}
+
+function updateSlideInLocalStorage(nameSlide) {
+    localStorage.setItem("nameSlide", nameSlide);
 }
 
 //* change sytle image
@@ -208,7 +247,6 @@ function openProductInfo(productId) {
                     </div>
                     <div class ="buttons d-flex align-items-center mb-0">
                         ${prepareButton(isProductIntoCart, productId)}
-                        <i class="fas fa-heart" onclick="ShowHeartCounter(this)"></i>
                     </div>
 
                 </div>
@@ -226,7 +264,7 @@ function updateValue(that, newValue, name) {
 }
 
 //* add product into cart
-function addToCart(productId, btn,status) {
+function addToCart(productId, btn, status) {
     let product = getProduct(productId),
         productEle = document.querySelector(`.product[data-product-id='${productId}']`),
         productInfoCart = {
@@ -314,7 +352,7 @@ function showDataIntoCart() {
 }
 
 //* check if product cart empty
-function checkProductLength() {    
+function checkProductLength() {
     if (productsCart.length == 0) {
         alertEmpty.classList.remove("d-none");
         bodyShop.classList.add("d-none");
@@ -327,7 +365,7 @@ function checkProductLength() {
 //* remove product from cart
 function deletProductFromCart(productId) {
     let productEle = popupContentShop.querySelector(`.box[data-product-id ="${productId}"]`),
-        productItemEle = document.querySelector(`.product[data-product-id ="${productId}"][data-status="true"]`)?? undefined,
+        productItemEle = document.querySelector(`.product[data-product-id ="${productId}"][data-status="true"]`) ?? undefined,
         buttonCart = productItemEle?.querySelector("button.remove");
     productEle.remove();
     removeFromCart(productId, buttonCart);
@@ -351,7 +389,7 @@ function ShowHeartCounter(heart) {
 
 function ShowCounter() {
     if (counter != 0) {
-        counterHeartEle.textContent = counter;  
+        counterHeartEle.textContent = counter;
     } else {
         counterHeartEle.classList.add("d-none");
         heartHeader.classList.remove("active");

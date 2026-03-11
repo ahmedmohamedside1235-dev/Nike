@@ -1,6 +1,8 @@
 let nextSlider = document.querySelector("header .sliders>button.next"),
     prevSlider = document.querySelector("header .sliders>button.prev"),
     slides = document.querySelectorAll("header .slider-item"),
+    mainColor,
+    nameSlide,
     html = document.querySelector("html"),
     navEle = document.querySelector(".navbar"),
     correctImages = document.querySelectorAll("section .title img"),
@@ -15,17 +17,28 @@ let nextSlider = document.querySelector("header .sliders>button.next"),
     heartHeader = document.querySelector("nav i.fa-heart"),
     counterHeartEle = heartHeader.previousElementSibling,
     counter = 0,
-    productsCart = [];    
+    productsCart = [];
 
 if (localStorage.getItem("productsCart") == null) {
     updateLocalStorage();
+    localStorage.setItem("mainColor", "#fb2527");
+    localStorage.setItem("nameSlide", "first");
 } else {
     productsCart = JSON.parse(localStorage.getItem("productsCart"));
+    mainColor = localStorage.getItem("mainColor");
+    nameSlide = localStorage.getItem("nameSlide");
 }
+
+html.style.setProperty("--main-color", mainColor);
 
 //* Add active to slider after loading
 window.addEventListener("DOMContentLoaded", function (e) {
-    slides[0].classList.add("active");
+    let slide = this.document.querySelector(`.sliders-inner .slider-item[data-name="${nameSlide}"]`);
+    slide.classList.add("active");
+    changeNavLogo(nameSlide, Nav_logo, "logo");
+    correctImages.forEach((img) => {
+        changeNavLogo(nameSlide, img, "correct");
+    });
     loadingPage.classList.add("hide");
 });
 
@@ -39,34 +52,19 @@ document.addEventListener("scroll", function (e) {
 });
 
 //* next slide
-nextSlider.addEventListener("click", (e) => {
-    let currentSlide = document.querySelector("header .slider-item.active"),
-        nextImgSlide = currentSlide.nextElementSibling ?? document.querySelector("header .slider-item:first-child");
-    currentSlide.classList.remove("active");
-    nextImgSlide.classList.add("active");
-
-    let numberSlide = nextImgSlide.dataset.name;
-    changeColor(numberSlide);
-    changeNavLogo(numberSlide, Nav_logo, "logo");
-    correctImages.forEach((img) => {
-        changeNavLogo(numberSlide, img, "correct");
-    });
-});
+nextSlider.addEventListener("click", nextImage);
 
 //* previous slide
-prevSlider.addEventListener("click", (e) => {
-    let currentSlide = document.querySelector("header .slider-item.active"),
-        prevImgSlide = currentSlide.previousElementSibling ?? document.querySelector("header .slider-item:last-child");
-    currentSlide.classList.remove("active");
-    prevImgSlide.classList.add("active");
+prevSlider.addEventListener("click", prevImage);
 
-    let numberSlide = prevImgSlide.dataset.name;
-    changeColor(numberSlide);
-    changeNavLogo(numberSlide, Nav_logo, "logo");
-    correctImages.forEach((img) => {
-        changeNavLogo(numberSlide, img, "correct");
-    });
-});
+document.addEventListener("keydown", function (e) {
+    if (e.key == "ArrowRight") {
+        nextImage();
+    } else if (e.key == "ArrowLeft") {
+        prevImage();
+    }
+})
+
 
 //* scroll nav links
 NavLinks.forEach(link => {
