@@ -43,7 +43,8 @@
                     </li>
                 </ul>
                 <ul class="icons list-unstyled d-flex mb-0 mx-auto mx-lg-0">
-                    <li class="me-3 heart position-relative"><span class="d-none">1</span><i class="fas fa-heart"></i>
+                    <li class="me-3 heart position-relative"><span class="d-none">1</span><i class="fas fa-heart"
+                            onclick="openPopup('favorite');showProductFavorite();"></i>
                     </li>
                     <li class="me-3"><i class="fas fa-shopping-cart"
                             onclick="openPopup('shop');showDataIntoCart();"></i>
@@ -224,6 +225,28 @@
             <div class="head text-center mb-4">
                 <h3 class="mainColor">Shop</h3>
                 <i class="far fa-times-circle mainColor exit" onclick="closePopup('shop')"></i>
+            </div>
+
+            <div class="alert alert-warning w-100 text-center d-none" role="alert">
+                there are no products
+            </div>
+
+            <div class="body item">
+                <div class="row">
+
+                </div>
+                <button class="btn mainButton w-100 d-block">Buy Now</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- * popup Favorite -->
+    <div class="popup" data-popup-name="favorite" onclick="closePopup('favorite')">
+        <div class="content py-3 px-4 rounded-3">
+            <div class="head text-center mb-4">
+                <h3 class="mainColor">Favorite</h3>
+                <i class="far fa-times-circle mainColor exit" onclick="closePopup('favorite')"></i>
             </div>
 
             <div class="alert alert-warning w-100 text-center d-none" role="alert">

@@ -10,24 +10,43 @@ let nextSlider = document.querySelector("header .sliders>button.next"),
     latestContent = document.querySelector("#Latest .content"),
     featuresContent = document.querySelector("#Featured .content .row"),
     popupContent = document.querySelectorAll(".popup .content"),
-    bodyShop = document.querySelector(".popup[data-popup-name='shop'] .content .body"),
     popupContentShop = document.querySelector(".popup[data-popup-name='shop'] .content .body.item>.row"),
-    alertEmpty = document.querySelector(".alert"),
+    popupContentFavorite = document.querySelector(".popup[data-popup-name='favorite'] .content .body.item>.row"),
     sections = document.querySelectorAll("section,header"),
     heartHeader = document.querySelector("nav i.fa-heart"),
     counterHeartEle = heartHeader.previousElementSibling,
     counter = 0,
-    productsCart = [];
+    productsCart = [],
+    productFovarite = [];
 
+// *check if product cart in local storage
 if (localStorage.getItem("productsCart") == null) {
     updateLocalStorage();
-    localStorage.setItem("mainColor", "#fb2527");
-    localStorage.setItem("nameSlide", "first");
 } else {
     productsCart = JSON.parse(localStorage.getItem("productsCart"));
+}
+
+//* check if main color and number of slide in local storage
+if (localStorage.getItem("mainColor") == null || localStorage.getItem("nameSlide") == null ) {
+    localStorage.setItem("mainColor", "#fb2527");
+    localStorage.setItem("nameSlide", "first");
+    localStorage.setItem("counter", 0);
+    nameSlide = localStorage.getItem("nameSlide");
+    mainColor = localStorage.getItem("mainColor");
+} else {
     mainColor = localStorage.getItem("mainColor");
     nameSlide = localStorage.getItem("nameSlide");
+    counter = JSON.parse(localStorage.getItem("counter"));
 }
+
+// *check if product favorite in local storage
+if (localStorage.getItem("productFovarite") == null) {
+    updateLocalStorageFovarite();
+} else {
+    productFovarite = JSON.parse(localStorage.getItem("productFovarite"));
+}
+
+
 
 html.style.setProperty("--main-color", mainColor);
 
@@ -40,6 +59,7 @@ window.addEventListener("DOMContentLoaded", function (e) {
         changeNavLogo(nameSlide, img, "correct");
     });
     loadingPage.classList.add("hide");
+    ShowCounter();
 });
 
 //* Add class scrolled to nav bar
@@ -56,6 +76,10 @@ nextSlider.addEventListener("click", nextImage);
 
 //* previous slide
 prevSlider.addEventListener("click", prevImage);
+
+setInterval(() => {
+    nextImage();
+}, 8000);
 
 document.addEventListener("keydown", function (e) {
     if (e.key == "ArrowRight") {
@@ -88,7 +112,8 @@ popupContent.forEach(function (popupCon) {
 
 latest.forEach(function (product) {
 
-    let isProductIntoCart = productsCart.find(item => item.id == product.id);
+    let isProductIntoCart = isProductInPopup(product.id, productsCart);
+    let bool = isProductInFavorite(product.id);
     latestContent.innerHTML += `
         <div class="product py-3 px-4 mb-3"
         data-status="true"
@@ -134,7 +159,7 @@ latest.forEach(function (product) {
 
                         <div class ="buttons d-flex mb-0 align-items-center">
                             ${prepareButton(isProductIntoCart, product.id)}
-                            <i class="fas fa-heart" onclick="ShowHeartCounter(this)"></i>
+                            <i class="fas fa-heart ${(bool != undefined) ? 'double' : ''}" onclick="addToFavorite(${product.id},this)"></i>
                         </div>
 
                     </div>
@@ -146,10 +171,15 @@ latest.forEach(function (product) {
 });
 
 features.forEach((product, index) => {
+    let bool = isProductInFavorite(product.id);
     featuresContent.innerHTML +=
         `
-            <div class="col-sm-6 col-lg-3 mb-3 position-relative" data-product-id="${product.id}" data-status="false">
-                <div class="item product">
+            <div class="col-sm-6 col-lg-3 mb-3 position-relative" data-status="false">
+                <div class="item product ${(bool != undefined) ? 'double' : ''}" ondblclick="addToFavorite(${product.id},this)" data-product-id="${product.id}" data-status="true">
+                    ${showParagraph(bool,product.id)}
+                    <div class="image ${(bool != undefined) ? 'animate' : ''} position-absolute  d-flex justify-content-center align-items-center">
+                        <img src="images/heart.png" class="img-fluid" alt="">
+                    </div>
                     <div class="head position-relative  mb-5">
                         <p class="${(product.discount == 0) ? 'd-none' : ''}">-${product.discount * 100}%</p>
                         <img src="images/products/${product.images[0]}" class="img-fluid selectedImg mb-3" alt="">
@@ -178,8 +208,4 @@ window.addEventListener("scroll", function () {
         }
     });
 });
-
-
-
-
 

@@ -51,6 +51,10 @@ function updateSlideInLocalStorage(nameSlide) {
     localStorage.setItem("nameSlide", nameSlide);
 }
 
+function updateCounterInLocalStorage() {
+    localStorage.setItem("counter", counter);
+}
+
 //* change sytle image
 function changeNavLogo(numberSlide, imgEle, nameFile) {
     let sourseLogo = document.querySelector("head link.logo");
@@ -202,14 +206,14 @@ function getProduct(productId) {
     return products.find(product => product.id == productId);
 }
 
-function isProductInCart(productId) {
-    return productsCart.find(item => item.id == productId);
+function isProductInPopup(productId, productContent) {
+    return productContent.find(item => item.id == productId);
 }
 
 //* show product information in feature 
 function openProductInfo(productId) {
     let product = getProduct(productId),
-        isProductIntoCart = isProductInCart(productId);
+        isProductIntoCart = isProductInPopup(productId, productsCart);
     productContentEle = document.querySelector(`.popup[data-popup-name="product"] .content`);
     productContentEle.innerHTML =
         `
@@ -303,6 +307,10 @@ function updateLocalStorage() {
     localStorage.setItem("productsCart", JSON.stringify(productsCart));
 }
 
+function updateLocalStorageFovarite() {
+    localStorage.setItem("productFovarite", JSON.stringify(productFovarite));
+}
+
 //* insert button in latest
 function prepareButton(isProductIntoCart, productId) {
     return (isProductIntoCart == undefined) ?
@@ -311,9 +319,15 @@ function prepareButton(isProductIntoCart, productId) {
         `<button class="btn mainButton rounded-2 mb-0 me-1 remove" onclick="removeFromCart(${productId},this)">Remove From Cart</button>`;
 }
 
+function showParagraph(bool, productId) {
+    return (bool != undefined) ? `<p data-id="${productId}">double click to unsave</p>` : `<p data-id="${productId}">double click to save</p>`;
+}
+
 //* insert product in popup cart
 function showDataIntoCart() {
-    checkProductLength();
+    let alertEmpty = document.querySelector(".popup[data-popup-name='shop'] .alert"),
+        bodyShop = document.querySelector(".popup[data-popup-name='shop'] .content .body");
+    checkProductLength(productsCart, alertEmpty, bodyShop);
     popupContentShop.innerHTML = "";
     productsCart.forEach(product => {
         let productObj = getProduct(product.id);
@@ -352,8 +366,8 @@ function showDataIntoCart() {
 }
 
 //* check if product cart empty
-function checkProductLength() {
-    if (productsCart.length == 0) {
+function checkProductLength(products, alertEmpty, bodyShop) {
+    if (products.length == 0) {
         alertEmpty.classList.remove("d-none");
         bodyShop.classList.add("d-none");
     } else {
@@ -366,32 +380,131 @@ function checkProductLength() {
 function deletProductFromCart(productId) {
     let productEle = popupContentShop.querySelector(`.box[data-product-id ="${productId}"]`),
         productItemEle = document.querySelector(`.product[data-product-id ="${productId}"][data-status="true"]`) ?? undefined,
-        buttonCart = productItemEle?.querySelector("button.remove");
+        buttonCart = productItemEle?.querySelector("button.remove"),
+        alertEmpty = document.querySelector(".popup[data-popup-name='shop'] .alert"),
+        bodyShop = document.querySelector(".popup[data-popup-name='shop'] .content .body");
     productEle.remove();
     removeFromCart(productId, buttonCart);
-    checkProductLength();
+    checkProductLength(productsCart, alertEmpty, bodyShop);
 }
 
 //* show number of favorate product
 function ShowHeartCounter(heart) {
-    let bool = heart.classList.contains("active");
+    let bool = heart.classList.contains("double");
     if (bool) {
-        heart.classList.remove("active");
+        heart.classList.remove("double");
         counter = --counter;
     } else {
-        heart.classList.add("active");
+        heart.classList.add("double");
         counter = ++counter;
     }
-    heartHeader.classList.add("active");
-    counterHeartEle.classList.remove("d-none");
+    updateCounterInLocalStorage();
     ShowCounter();
 }
 
 function ShowCounter() {
-    if (counter != 0) {
+    if (counter > 0) {
         counterHeartEle.textContent = counter;
+        heartHeader.classList.add("active");
+        counterHeartEle.classList.remove("d-none");
     } else {
         counterHeartEle.classList.add("d-none");
         heartHeader.classList.remove("active");
     }
+}
+
+function isProductInFavorite(id) {
+    return productFovarite.find((item) => item == id);
+}
+
+function addToFavorite(productId, productEle) {
+    let bool = isProductInFavorite(productId),
+        imageHeart = productEle.querySelector(".image img") ?? undefined;
+
+    if (bool == undefined) {
+        let paragraph = document.querySelector(`.product>p[data-id="${productId}"]`) ?? undefined;
+        if (paragraph != undefined) {
+            paragraph.textContent = "double click to unsave"
+        }
+
+        productFovarite.push(productId);
+        updateLocalStorageFovarite();
+        imageHeart?.classList.add("animate");
+    } else {
+        removeFromFavorite(productId);
+        imageHeart?.classList.remove("animate");
+    }
+    setTimeout(() => {
+        ShowHeartCounter(productEle);
+    }, 200);
+}
+
+function removeFromFavorite(productId) {
+    let paragraph = document.querySelector(`.product>p[data-id="${productId}"]`) ?? undefined;
+    if (paragraph != undefined) {
+        paragraph.textContent = "double click to save"
+    }
+    productFovarite = productFovarite.filter(product => product != productId);
+    updateLocalStorageFovarite();
+}
+
+function showProductFavorite() {
+    let alertEmpty = document.querySelector(".popup[data-popup-name='favorite'] .alert"),
+        bodyFavorite = document.querySelector(".popup[data-popup-name='favorite'] .content .body");
+    checkProductLength(productFovarite, alertEmpty, bodyFavorite);
+    popupContentFavorite.innerHTML = "";
+    productFovarite.forEach(productId => {
+        let product = getProduct(productId);
+        popupContentFavorite.innerHTML +=
+            `
+            <div class="col-sm-6 col-md-4 mb-3 box" data-product-id ="${product.id}">
+                <div class="item py-3 px-4 rounded-3">
+                    <div class="head">
+                        <img src="images/products/${product.images[0]}" alt="" class="img-fluid">
+                    </div>
+                    <div class="body">
+                        <h5 class="mb-3">${(product.name.length > 13) ? `<abbr title="${product.name}">${product.name.slice(0, 13) + "..."}</abbr>` : product.name}</h5>
+                        <div class="mb-3 price d-flex align-items-center">
+                            <h6 class="mb-0 me-2 fw-bolder">Price :</h6>
+                            ${discountProduct(product.price, product.discount)}
+                        </div>
+                        
+                        <div class="mb-3 size d-flex align-items-center">
+                            <h6 class="mb-0 me-2 fw-bolder">Size :</h6>
+                            ${showSize(product.sizes)}
+                        </div>
+
+                        <div class="mb-3 color d-flex align-items-center">
+                            <h6 class="mb-0 me-2 fw-bolder">Color :</h6>
+                            <ul class="list-unstyled d-flex mb-0">
+                                ${showColor(product.colors)}
+                            </ul>
+                        </div>
+
+                        <button class="btn w-100 btn-danger" onclick="deletProductFromFavorite(${product.id})">Remove</button>
+                    </div>
+                </div>
+            </div>
+        `
+    })
+
+}
+
+function deletProductFromFavorite(productId) {
+    let productElePopup = popupContentFavorite.querySelector(`.box[data-product-id ="${productId}"]`),
+        productEle = document.querySelector(`.product[data-product-id ="${productId}"][data-status="true"]`),
+        heart = document.querySelector(`.product[data-product-id ="${productId}"][data-status="true"] .fa-heart`) ?? undefined,
+        alertEmpty = document.querySelector(".popup[data-popup-name='favorite'] .alert"),
+        bodyFavorite = document.querySelector(".popup[data-popup-name='favorite'] .content .body"),
+        imageHeart = productEle.querySelector(".image img") ?? undefined;
+
+    if (heart != undefined) {
+        ShowHeartCounter(heart);
+    } else {
+        imageHeart?.classList.remove("animate");
+        ShowHeartCounter(productEle);
+    }
+    removeFromFavorite(productId);
+    checkProductLength(productFovarite, alertEmpty, bodyFavorite);
+    productElePopup.remove();
 }

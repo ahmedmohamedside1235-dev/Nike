@@ -306,6 +306,43 @@ header .slider-item.active .part2 img:last-child {
     position: relative;
     overflow: hidden;
     padding: 20px;
+    user-select: none;
+}
+
+#Featured .product.double {
+    background-color: rgb(from var(--main-color) r g b / 0.3);
+}
+
+#Featured .product>p {
+    padding: 10px 10px 10px 5px;
+    position: absolute;
+    background-color: rgb(from var(--main-color) r g b / 0.5);
+    top: 20px;
+    left: -100%;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    font-size: 12px;
+}
+
+#Featured .product>.image {
+    left: 0;
+    top: 0;
+    height: 100%;
+}
+
+#Featured .product>.image img {
+    opacity: 0;
+    transform: scale(0);
+}
+
+#Featured .product>.image img.animate {
+    animation: heart 1s linear;
+}
+
+#Featured .product:hover>p {
+    left: 0;
+    transition-duration: 1s;
+    transition-delay: .5s;
 }
 
 #Featured .product .head img {

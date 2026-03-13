@@ -101,6 +101,7 @@ body {
     justify-content: center;
     align-items: center;
     background-color: #00000080;
+    backdrop-filter: blur(3px);
 }
 
 
@@ -108,11 +109,13 @@ body {
     display: flex;
 }
 
-.popup[data-popup-name="shop"] {
+.popup[data-popup-name="shop"],
+.popup[data-popup-name="favorite"] {
     overflow-y: auto;
 }
 
-.popup[data-popup-name="shop"].active {
+.popup[data-popup-name="shop"].active,
+.popup[data-popup-name="favorite"].active {
     display: block;
 }
 
@@ -128,20 +131,29 @@ body {
     transition-delay: 0.2s;
 }
 
-.popup[data-popup-name="shop"] .content {
+.popup[data-popup-name="shop"] .content,
+.popup[data-popup-name="favorite"] .content {
     margin: 20px auto 0 auto;
     width: 750px;
 }
 
-.popup[data-popup-name="shop"] .content .body.item .row .item {
+.popup[data-popup-name="favorite"] .content .body.item .row .item .size li{
+    width: 20px;
+    height: 20px;
+}
+
+.popup[data-popup-name="shop"] .content .body.item .row .item,
+.popup[data-popup-name="favorite"] .content .body.item .row .item {
     background-color: #fff;
 }
 
-.popup[data-popup-name="shop"] .content .body.item .row .item h5 abbr {
+.popup[data-popup-name="shop"] .content .body.item .row .item h5 abbr,
+.popup[data-popup-name="favorite"] .content .body.item .row .item h5 abbr {
     text-decoration: none;
 }
 
-.popup[data-popup-name="shop"] .content .body.item .row .item p span {
+.popup[data-popup-name="shop"] .content .body.item .row .item p span,
+.popup[data-popup-name="favorite"] .content .body.item .row .item p span {
     font-size: 14px;
 }
 
@@ -180,7 +192,7 @@ i.fa-heart {
     cursor: pointer;
 }
 
-i.fa-heart.active {
+i.fa-heart.double {
     color: var(--main-color);
 }
 
@@ -206,9 +218,9 @@ i.fa-heart.active {
     border-radius: 100%;
     cursor: pointer;
     border: none;
+    border: 1px solid var(--main-color);
 }
 
 .color li.active {
-    border: 1px solid var(--main-color);
     box-shadow: #00000040 0 54px 55px, #0000001f 0 -12px 30px, #0000001f 0 4px 6px, #0000002b 0 12px 13px, #00000017 0 -3px 5px;
 }

@@ -11,13 +11,15 @@
 
     /* *popup product and cart */
     .popup[data-popup-name="product"].active,
-    .popup[data-popup-name="shop"].active {
+    .popup[data-popup-name="shop"].active,
+    .popup[data-popup-name="favorite"].active {
         display: block;
         overflow-y: auto;
     }
 
     .popup[data-popup-name="product"].active .content,
-    .popup[data-popup-name="shop"].active .content {
+    .popup[data-popup-name="shop"].active .content,
+    .popup[data-popup-name="favorite"].active .content {
         width: 280px;
         margin: 15px auto;
     }
@@ -160,7 +162,8 @@
 
     /* *popup product and cart */
     .popup[data-popup-name="product"].active .content,
-    .popup[data-popup-name="shop"].active .content {
+    .popup[data-popup-name="shop"].active .content,
+    .popup[data-popup-name="favorite"].active .content {
         width: 350px;
     }
 
@@ -204,7 +207,8 @@
 
 
     /* *popup product and cart */
-    .popup[data-popup-name="shop"].active .content {
+    .popup[data-popup-name="shop"].active .content,
+    .popup[data-popup-name="favorite"].active .content {
         width: 500px;
     }
 
@@ -213,7 +217,7 @@
     }
 
     /* *Header */
-    header .sliders {   
+    header .sliders {
         padding-top: 80px;
     }
 
@@ -263,17 +267,20 @@
         display: flex;
     }
 
-    .popup[data-popup-name="shop"].active {
+    .popup[data-popup-name="shop"].active,
+    .popup[data-popup-name="favorite"].active {
         display: block;
     }
 
     .popup[data-popup-name="product"].active .content,
-    .popup[data-popup-name="shop"].active .content {
+    .popup[data-popup-name="shop"].active .content,
+    .popup[data-popup-name="favorite"].active .content {
         width: 750px;
         margin: initial;
     }
 
-    .popup[data-popup-name="shop"].active .content {
+    .popup[data-popup-name="shop"].active .content,
+    .popup[data-popup-name="favorite"].active .content {
         margin: 25px auto;
     }
 
