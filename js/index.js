@@ -199,10 +199,11 @@ features.forEach((product, index) => {
         `;
 });
 
+const navHeight = navEle.clientHeight + 48;
 window.addEventListener("scroll", function () {
     let scroll = this.window.scrollY;
     sections.forEach(section => {
-        if (scroll >= (section.offsetTop - (navEle.clientHeight + 48))) {
+        if (scroll >= (section.offsetTop - navHeight)) {
             let link = this.document.querySelector(`.navbar-nav li[data-id ="${section.id}"]`);
             updateActiveLink(link, ".navbar-nav");
         }
