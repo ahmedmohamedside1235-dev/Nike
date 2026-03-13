@@ -51,7 +51,7 @@ if (localStorage.getItem("productFovarite") == null) {
 html.style.setProperty("--main-color", mainColor);
 
 //* Add active to slider after loading
-window.addEventListener("load", function (e) {
+window.addEventListener("DOMContentLoaded", function (e) {
     let slide = this.document.querySelector(`.sliders-inner .slider-item[data-name="${nameSlide}"]`);
     slide.classList.add("active");
     changeNavLogo(nameSlide, Nav_logo, "logo");
