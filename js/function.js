@@ -5,7 +5,7 @@ function changeSrc(mainSrc, newSrc) {
     mainScrArr[mainScrArr.length - 1] = newSrc;
     return mainScrArr.join("/");
 }
-
+    
 function nextImage() {
     let currentSlide = document.querySelector("header .slider-item.active"),
         nextImgSlide = currentSlide.nextElementSibling ?? document.querySelector("header .slider-item:first-child");

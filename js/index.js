@@ -117,7 +117,7 @@ latest.forEach(function (product) {
     let isProductIntoCart = isProductInPopup(product.id, productsCart);
     let bool = isProductInFavorite(product.id);
     latestContent.innerHTML += `
-        <div class="product py-3 px-4 mb-3"
+        <div class="product info py-3 px-4 mb-3"
         data-status="true"
         data-product-id = "${product.id}"
             data-selected-color="${(isProductIntoCart != undefined) ? isProductIntoCart.color : product.colors[0]}"
