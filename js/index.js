@@ -19,32 +19,34 @@ let nextSlider = document.querySelector("header .sliders>button.next"),
     productsCart = [],
     productFovarite = [];
 
-// *check if product cart in local storage
-if (localStorage.getItem("productsCart") == null) {
-    updateLocalStorage();
-} else {
-    productsCart = JSON.parse(localStorage.getItem("productsCart"));
-}
+(function () {
+    // *check if product cart in local storage
+    if (localStorage.getItem("productsCart") == null) {
+        updateLocalStorage();
+    } else {
+        productsCart = JSON.parse(localStorage.getItem("productsCart"));
+    }
 
-//* check if main color and number of slide in local storage
-if (localStorage.getItem("mainColor") == null || localStorage.getItem("nameSlide") == null ) {
-    localStorage.setItem("mainColor", "#fb2527");
-    localStorage.setItem("nameSlide", "first");
-    localStorage.setItem("counter", 0);
-    nameSlide = localStorage.getItem("nameSlide");
-    mainColor = localStorage.getItem("mainColor");
-} else {
-    mainColor = localStorage.getItem("mainColor");
-    nameSlide = localStorage.getItem("nameSlide");
-    counter = JSON.parse(localStorage.getItem("counter"));
-}
+    //* check if main color and number of slide in local storage
+    if (localStorage.getItem("mainColor") == null || localStorage.getItem("nameSlide") == null) {
+        localStorage.setItem("mainColor", "#fb2527");
+        localStorage.setItem("nameSlide", "first");
+        localStorage.setItem("counter", 0);
+        nameSlide = localStorage.getItem("nameSlide");
+        mainColor = localStorage.getItem("mainColor");
+    } else {
+        mainColor = localStorage.getItem("mainColor");
+        nameSlide = localStorage.getItem("nameSlide");
+        counter = JSON.parse(localStorage.getItem("counter"));
+    }
 
-// *check if product favorite in local storage
-if (localStorage.getItem("productFovarite") == null) {
-    updateLocalStorageFovarite();
-} else {
-    productFovarite = JSON.parse(localStorage.getItem("productFovarite"));
-}
+    // *check if product favorite in local storage
+    if (localStorage.getItem("productFovarite") == null) {
+        updateLocalStorageFovarite();
+    } else {
+        productFovarite = JSON.parse(localStorage.getItem("productFovarite"));
+    }
+})()
 
 
 
