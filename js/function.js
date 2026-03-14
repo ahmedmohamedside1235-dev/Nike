@@ -66,8 +66,8 @@ function changeNavLogo(numberSlide, imgEle, nameFile) {
 //* update active link
 function updateActiveLink(link, parent) {
     let parenrEle = link.closest(`${parent}`);
-    let activeLink = parenrEle.querySelector(`li.active`);
-    activeLink.classList.remove("active");
+    let activeLink = parenrEle.querySelector(`li.active`) ?? undefined;
+    activeLink?.classList.remove("active");
     link.classList.add("active");
 }
 
@@ -169,7 +169,7 @@ function discountProduct(price, discount) {
 
     afterdiscount =
         `
-        <p class="mb-0 d-flex justify-content-center">
+        <p class="mb-0 d-flex">
             <span class="me-1"><del class="mainColor ${(discount == 0) ? 'd-none' : ''}">${price}<sup>$</sup></del></span>
             <span>${(Number.isInteger(dicoun)) ? dicoun : dicoun.toFixed(2)}<sup>$</sup></span>
         </p>
@@ -217,7 +217,7 @@ function openProductInfo(productId) {
     productContentEle = document.querySelector(`.popup[data-popup-name="product"] .content`);
     productContentEle.innerHTML =
         `
-        <div class="row product"
+        <div class="row product info"
             data-product-id="${product.id}"
             data-selected-color="${(isProductIntoCart != undefined) ? isProductIntoCart.color : product.colors[0]}"
             data-selected-size="${(isProductIntoCart != undefined) ? isProductIntoCart.size : product.sizes[0]}">
@@ -270,13 +270,14 @@ function updateValue(that, newValue, name) {
 //* add product into cart
 function addToCart(productId, btn, status) {
     let product = getProduct(productId),
-        productEle = document.querySelector(`.product[data-product-id='${productId}']`),
+        productEle = document.querySelector(`.product.info[data-product-id='${productId}']`),
         productInfoCart = {
             id: product.id,
             size: productEle.getAttribute("data-selected-size"),
             color: productEle.getAttribute("data-selected-color"),
             statusEle: status
         };
+    
     productsCart.push(productInfoCart);
     toggleCartButton(btn, "remove");
     btn.setAttribute("onclick", `removeFromCart(${productId},this)`);

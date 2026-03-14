@@ -190,7 +190,7 @@ features.forEach((product, index) => {
                             </ul>
                         </div>
                     </div>
-                    <div class="body text-center">
+                    <div class="body justify-content-center d-flex flex-column align-items-center">
                         <h6>Basketball Shoes</h6>
                         ${discountProduct(product.price, product.discount)}
                     </div>
