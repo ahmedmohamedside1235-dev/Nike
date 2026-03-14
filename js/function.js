@@ -5,7 +5,7 @@ function changeSrc(mainSrc, newSrc) {
     mainScrArr[mainScrArr.length - 1] = newSrc;
     return mainScrArr.join("/");
 }
-    
+
 function nextImage() {
     let currentSlide = document.querySelector("header .slider-item.active"),
         nextImgSlide = currentSlide.nextElementSibling ?? document.querySelector("header .slider-item:first-child");
@@ -19,6 +19,10 @@ function nextImage() {
     correctImages.forEach((img) => {
         changeNavLogo(numberSlide, img, "correct");
     });
+    clearInterval(interval);
+    interval = setInterval(() => {
+        nextImage();
+    }, 8000);
 }
 
 function prevImage() {
@@ -34,6 +38,11 @@ function prevImage() {
     correctImages.forEach((img) => {
         changeNavLogo(numberSlide, img, "correct");
     });
+
+    clearInterval(interval);
+    interval = setInterval(() => {
+        nextImage();
+    }, 8000);
 }
 
 //* change main color
@@ -277,7 +286,7 @@ function addToCart(productId, btn, status) {
             color: productEle.getAttribute("data-selected-color"),
             statusEle: status
         };
-    
+
     productsCart.push(productInfoCart);
     toggleCartButton(btn, "remove");
     btn.setAttribute("onclick", `removeFromCart(${productId},this)`);

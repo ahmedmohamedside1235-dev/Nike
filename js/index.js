@@ -48,8 +48,6 @@ let nextSlider = document.querySelector("header .sliders>button.next"),
     }
 })()
 
-
-
 html.style.setProperty("--main-color", mainColor);
 
 //* Add active to slider after loading
@@ -79,7 +77,7 @@ nextSlider.addEventListener("click", nextImage);
 //* previous slide
 prevSlider.addEventListener("click", prevImage);
 
-setInterval(() => {
+let interval = setInterval(() => {
     nextImage();
 }, 8000);
 
