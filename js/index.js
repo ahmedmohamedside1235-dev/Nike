@@ -178,7 +178,7 @@ features.forEach((product, index) => {
                 <div class="item product ${(bool != undefined) ? 'double' : ''}" ondblclick="addToFavorite(${product.id},this)" data-product-id="${product.id}" data-status="true">
                     ${showParagraph(bool,product.id)}
                     <div class="image ${(bool != undefined) ? 'animate' : ''} position-absolute  d-flex justify-content-center align-items-center">
-                        <img src="images/heart.png" class="img-fluid" alt="">
+                        <img src="images/first.png" class="img-fluid" alt="">
                     </div>
                     <div class="head position-relative  mb-5">
                         <p class="${(product.discount == 0) ? 'd-none' : ''}">-${product.discount * 100}%</p>
