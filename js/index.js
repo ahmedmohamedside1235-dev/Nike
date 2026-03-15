@@ -60,7 +60,7 @@ window.addEventListener("DOMContentLoaded", function (e) {
     });
     setTimeout(() => {   
         loadingPage.classList.add("hide");
-    }, 1000);
+    }, 3000);
     ShowCounter();
 });
 
