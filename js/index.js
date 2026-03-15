@@ -58,7 +58,9 @@ window.addEventListener("DOMContentLoaded", function (e) {
     correctImages.forEach((img) => {
         changeNavLogo(nameSlide, img, "correct");
     });
-    loadingPage.classList.add("hide");
+    setTimeout(() => {   
+        loadingPage.classList.add("hide");
+    }, 1000);
     ShowCounter();
 });
 
